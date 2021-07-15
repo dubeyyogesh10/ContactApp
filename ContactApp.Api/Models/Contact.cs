@@ -2,6 +2,7 @@
 
 namespace ContactApp.Api.Models
 {
+    using System;
     using System.ComponentModel.DataAnnotations;
 
     /// <summary>
@@ -9,6 +10,11 @@ namespace ContactApp.Api.Models
     /// </summary>
     public class Contact
     {
+        public Contact()
+        {
+            Id = Guid.NewGuid();
+        }
+        public Guid Id { get; set; }
         /// <summary>
         /// Gets or sets the FirstName.
         /// </summary>

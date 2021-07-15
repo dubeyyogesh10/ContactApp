@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ContactApp.Api.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,30 +13,71 @@ namespace ContactApp.Api.Controllers
     [ApiController]
     public class ContactAppController : ControllerBase
     {
+
+        private static Contact contact;
+        private static List<Contact> contacts = new List<Contact>();
+
+        //public ContactAppController()
+        //{
+        //    this.contacts = new List<Contact>();
+        //}
+        public Contact Contact
+        {
+            get => contact;
+            set => contact = value;
+        }
+        public List<Contact> Contacts
+        {
+            get => contacts;
+            set => contacts = value;
+        }
+
         // GET: api/<ContactAppController>
         [HttpGet]
-        public IEnumerable<string> GetContacts()
+        public ActionResult<List<Contact>> GetContacts()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(Contacts);
         }
 
         // GET api/<ContactAppController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult<Contact> GetContactById(Guid id)
         {
-            return "value";
+            return Contacts.FirstOrDefault(x => x.Id == id);
         }
 
         // POST api/<ContactAppController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult<bool> Post([FromBody] Contact value)
         {
+            var contact = new Contact();
+            if (contact != null)
+            {
+                contact.FirstName = value.FirstName;
+                contact.LastName = value.LastName;
+                contact.Email = value.Email;
+                contact.PhoneNumer = value.PhoneNumer;
+                contact.Status = value.Status;
+            }
+            this.Contacts.Add(contact);
+            return Ok(true);
         }
 
         // PUT api/<ContactAppController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult<bool> Put(Guid id, [FromBody] Contact value)
         {
+            var contact = Contacts.FirstOrDefault(x => x.Id == id);
+            if (contact != null)
+            {
+                contact.Id = value.Id;
+                contact.FirstName = value.FirstName;
+                contact.LastName = value.LastName;
+                contact.Email = value.Email;
+                contact.PhoneNumer = value.PhoneNumer;
+                contact.Status = value.Status;
+            }
+            return Ok(true);
         }
 
         // DELETE api/<ContactAppController>/5
