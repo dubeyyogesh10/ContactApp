@@ -42,7 +42,7 @@ namespace ContactApp.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<bool>> Post([FromBody] Contact request)
         {
-            return Ok(await mediatr.Send(new EditContactCommand()
+            return Ok(await mediatr.Send(new AddContactCommand()
             {
                 FirstName = request.FirstName,
                 LastName = request.LastName,
