@@ -14,67 +14,67 @@ namespace ContactApp.Repository.Services
     /// </summary>
     public sealed class ContactService : IContactService
     {
+        /// <summary>
+        /// Defines the dbClient.
+        /// </summary>
         private readonly IDbClient dbClient;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ContactService"/> class.
+        /// </summary>
+        /// <param name="dbClient">The dbClient<see cref="IDbClient"/>.</param>
         public ContactService(IDbClient dbClient)
         {
             this.dbClient = dbClient;
         }
+
         /// <summary>
         /// The AddContact.
         /// </summary>
         /// <param name="contact">The contact<see cref="Contact"/>.</param>
         /// <returns>The <see cref="Task{bool}"/>.</returns>
-        public Task<bool> AddContact(Contact contact)
+        public async Task<bool> AddContact(Contact contact)
         {
-            throw new NotImplementedException();
+            return await dbClient.AddContact(contact).ConfigureAwait(false);
         }
 
         /// <summary>
         /// The DeleteContact.
         /// </summary>
-        /// <param name="id">The id<see cref="string"/>.</param>
+        /// <param name="id">The id<see cref="long"/>.</param>
         /// <returns>The <see cref="Task{bool}"/>.</returns>
-        public Task<bool> DeleteContact(string id)
+        public async Task<bool> DeleteContact(long id)
         {
-            throw new NotImplementedException();
+            return await dbClient.DeleteContact(id).ConfigureAwait(false);
         }
 
         /// <summary>
         /// The GetContact.
         /// </summary>
-        /// <param name="id">The id<see cref="string"/>.</param>
+        /// <param name="id">The id<see cref="long"/>.</param>
         /// <returns>The <see cref="Task{Contact}"/>.</returns>
-        public Contact GetContact(string id)
+        public async Task<Contact> GetContact(long id)
         {
-            var test = new Contact
-            {
-                FirstName = "ABC",
-                LastName = "demo",
-                Email = "demo@demo.com",
-                PhoneNumber = "123212212",
-                Status = false
-            };
-            return test;
+            return await dbClient.GetContact(id).ConfigureAwait(false);
         }
 
         /// <summary>
         /// The GetContacts.
         /// </summary>
         /// <returns>The <see cref="Task{List{Contact}}"/>.</returns>
-        public Task<List<Contact>> GetContacts()
+        public async Task<List<Contact>> GetContacts()
         {
-            return dbClient.GetContacts();
+            return await dbClient.GetContacts().ConfigureAwait(false);
         }
 
         /// <summary>
         /// The UpdateContact.
         /// </summary>
-        /// <param name="id">The id<see cref="string"/>.</param>
+        /// <param name="contact">The contact<see cref="Contact"/>.</param>
         /// <returns>The <see cref="Task{bool}"/>.</returns>
-        public Task<bool> UpdateContact(string id)
+        public async Task<bool> UpdateContact(Contact contact)
         {
-            throw new NotImplementedException();
+            return await dbClient.UpdateContact(contact).ConfigureAwait(false);
         }
     }
 }

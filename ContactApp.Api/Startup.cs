@@ -34,7 +34,7 @@ namespace ContactApp.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>((op) => op.UseSqlServer(Configuration["ConnectionString"]));
-            services.AddSingleton<IDbClient, DbClient>();
+            services.AddScoped<IDbClient, DbClient>();
             services.Configure<DbConfig>(Configuration);
             services.AddScoped<IContactService, ContactService>();
             services.AddControllers();

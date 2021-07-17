@@ -1,5 +1,8 @@
 ﻿
 using ContactApp.Infra.Model;
+using ContactApp.Repository.Commands;
+using ContactApp.Repository.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -14,77 +17,61 @@ namespace ContactApp.Api.Controllers
     [ApiController]
     public class ContactAppController : ControllerBase
     {
+        private readonly IMediator mediatr;
 
-        private static Contact contact;
-        private static List<Contact> contacts = new List<Contact>();
-
-        //public ContactAppController()
-        //{
-        //    this.contacts = new List<Contact>();
-        //}
-        public Contact Contact
+        public ContactAppController(IMediator mediatr)
         {
-            get => contact;
-            set => contact = value;
-        }
-        public List<Contact> Contacts
-        {
-            get => contacts;
-            set => contacts = value;
+            this.mediatr = mediatr;
         }
 
         // GET: api/<ContactAppController>
         [HttpGet]
-        public ActionResult<List<Contact>> GetContacts()
+        public async Task<ActionResult<List<Contact>>> GetContacts()
         {
-            return Ok(Contacts);
+            return Ok(await mediatr.Send(new GetAllContactQuery()).ConfigureAwait(false));
         }
 
         // GET api/<ContactAppController>/5
         [HttpGet("{id}")]
-        public ActionResult<Contact> GetContactById(Guid id)
+        public async Task<ActionResult<Contact>> GetContactById(long id)
         {
-            return new Contact();
+            return Ok(await mediatr.Send(new GetContactByIdQuery() { Id = id }).ConfigureAwait(false));
         }
 
         // POST api/<ContactAppController>
         [HttpPost]
-        public ActionResult<bool> Post([FromBody] Contact value)
+        public async Task<ActionResult<bool>> Post([FromBody] Contact request)
         {
-            var contact = new Contact();
-            if (contact != null)
+            return Ok(await mediatr.Send(new EditContactCommand()
             {
-                contact.FirstName = value.FirstName;
-                contact.LastName = value.LastName;
-                contact.Email = value.Email;
-                contact.PhoneNumber = value.PhoneNumber;
-                contact.Status = value.Status;
-            }
-            this.Contacts.Add(contact);
-            return Ok(true);
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                Email = request.Email,
+                PhoneNumber = request.PhoneNumber,
+                Status = request.Status,
+            }).ConfigureAwait(false));
         }
 
         // PUT api/<ContactAppController>/5
         [HttpPut("{id}")]
-        public ActionResult<bool> Put(Guid id, [FromBody] Contact value)
+        public async Task<ActionResult<bool>> UpdateContact(long id, [FromBody] Contact request)
         {
-            var contact = new Contact();
-            if (contact != null)
+            return Ok(await mediatr.Send(new EditContactCommand()
             {
-                contact.Id = value.Id;
-                contact.FirstName = value.FirstName;
-                contact.LastName = value.LastName;
-                contact.Email = value.Email;
-                contact.PhoneNumber = value.PhoneNumber;
-                contact.Status = value.Status;
-            }
-            return Ok(true);
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                Email = request.Email,
+                PhoneNumber = request.PhoneNumber,
+                Status = request.Status,
+                Id = id
+            }).ConfigureAwait(false));
         }
 
         // DELETE api/<ContactAppController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult<bool>> Delete(int id)
         {
+            return Ok(await mediatr.Send(new DeleteContactCommand() { Id = id }).ConfigureAwait(false));
         }
     }
 }

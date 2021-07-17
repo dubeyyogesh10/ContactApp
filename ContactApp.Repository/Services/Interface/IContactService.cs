@@ -27,22 +27,22 @@ namespace ContactApp.Repository.Services.Interface
         /// <summary>
         /// The GetContact.
         /// </summary>
-        /// <param name="id">The id<see cref="string"/>.</param>
+        /// <param name="id">The id<see cref="long"/>.</param>
         /// <returns>The <see cref="bool"/>.</returns>
-        Contact GetContact(string id);
+        Task<Contact> GetContact(long id);
 
         /// <summary>
         /// The DeleteContact.
         /// </summary>
-        /// <param name="id">The id<see cref="string"/>.</param>
+        /// <param name="id">The id<see cref="long"/>.</param>
         /// <returns>The <see cref="bool"/>.</returns>
-        Task<bool> DeleteContact(string id);
+        Task<bool> DeleteContact(long id);
 
         /// <summary>
         /// The UpdateContact.
         /// </summary>
-        /// <param name="id">The id<see cref="string"/>.</param>
+        /// <param name="contact">The contact<see cref="Contact"/>.</param>
         /// <returns>The <see cref="bool"/>.</returns>
-        Task<bool> UpdateContact(string id);
+        Task<bool> UpdateContact(Contact contact);
     }
 }

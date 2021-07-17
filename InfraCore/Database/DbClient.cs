@@ -34,7 +34,8 @@ namespace ContactApp.Infra.Database
         public async Task<bool> AddContact(Contact contact)
         {
             await context.Contact.AddAsync(contact);
-            return await context.SaveChangesAsync() > 0;
+            var result = await context.SaveChangesAsync().ConfigureAwait(false);
+            return result > 0;
         }
 
         /// <summary>
@@ -44,11 +45,12 @@ namespace ContactApp.Infra.Database
         /// <returns>The <see cref="Task{bool}"/>.</returns>
         public async Task<bool> DeleteContact(long id)
         {
-            var contact = await context.Contact.FindAsync(id);
+            var contact = await context.Contact.FindAsync(id).ConfigureAwait(false);
             if (contact != null)
             {
                 context.Contact.Remove(contact);
-                return await context.SaveChangesAsync() > 0;
+                var result = await context.SaveChangesAsync().ConfigureAwait(false);
+                return result > 0;
             }
 
             return false;
@@ -61,7 +63,7 @@ namespace ContactApp.Infra.Database
         /// <returns>The <see cref="Task{Contact}"/>.</returns>
         public async Task<Contact> GetContact(long id)
         {
-            return await context.Contact.FindAsync(id);
+            return await context.Contact.FindAsync(id).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -70,7 +72,7 @@ namespace ContactApp.Infra.Database
         /// <returns>The <see cref="List{Contact}"/>.</returns>
         public async Task<List<Contact>> GetContacts()
         {
-            return await context.Contact.ToListAsync();
+            return await context.Contact.ToListAsync().ConfigureAwait(false);
         }
 
         /// <summary>
@@ -80,11 +82,12 @@ namespace ContactApp.Infra.Database
         /// <returns>The <see cref="Task{bool}"/>.</returns>
         public async Task<bool> UpdateContact(Contact contact)
         {
-            var existingContact = await context.Contact.FindAsync(contact.Id);
+            var existingContact = await context.Contact.FindAsync(contact.Id).ConfigureAwait(false);
             if (existingContact != null)
             {
                 context.Contact.Update(contact);
-                return await context.SaveChangesAsync() > 0;
+                var result = await context.SaveChangesAsync().ConfigureAwait(false);
+                return result > 0;
             }
 
             return false;

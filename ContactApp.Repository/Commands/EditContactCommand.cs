@@ -1,20 +1,24 @@
-﻿// Authored By Yogesh, File Name : AddContactCommand.cs ,Date 18-07-2021
+﻿// Authored By Yogesh, File Name : EditContactCommand.cs ,Date 18-07-2021
 
 namespace ContactApp.Repository.Commands
 {
-    using ContactApp.Infra.Model;
     using MediatR;
     using System;
 
     /// <summary>
-    /// Defines the <see cref="AddContactCommand" />.
+    /// Defines the <see cref="EditContactCommand" />.
     /// </summary>
-    public sealed class AddContactCommand : IRequest<bool>
+    public sealed class EditContactCommand : IRequest<bool>
     {
         /// <summary>
         /// Gets or sets the PhoneNumber.
         /// </summary>
         public string PhoneNumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Id.
+        /// </summary>
+        public long Id { get; set; }
 
         /// <summary>
         /// Gets or sets the FirstName.
