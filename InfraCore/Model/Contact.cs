@@ -1,20 +1,29 @@
-﻿// Authored By Contact.cs, Date 16-07-2021
+﻿// Authored By Yogesh, File Name : Contact.cs ,Date 18-07-2021
 
-namespace ContactApp.Api.Models
+namespace ContactApp.Infra.Model
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     /// <summary>
     /// Defines the <see cref="Contact" />.
     /// </summary>
     public class Contact
     {
-        public Contact()
-        {
-            Id = Guid.NewGuid();
-        }
-        public Guid Id { get; set; }
+        /// <summary>
+        /// Gets or sets the Id.
+        /// </summary>
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the PhoneNumber.
+        /// </summary>
+        [Required]
+        public string PhoneNumber { get; set; }
+
         /// <summary>
         /// Gets or sets the FirstName.
         /// </summary>
@@ -31,13 +40,8 @@ namespace ContactApp.Api.Models
         /// Gets or sets the Email.
         /// </summary>
         [EmailAddress]
-        public string Email { get; set; }
-
-        /// <summary>
-        /// Gets or sets the PhoneNumer.
-        /// </summary>
         [Required]
-        public string PhoneNumer { get; set; }
+        public string Email { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether Status.

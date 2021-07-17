@@ -1,4 +1,5 @@
-﻿using ContactApp.Api.Models;
+﻿
+using ContactApp.Infra.Model;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -43,7 +44,7 @@ namespace ContactApp.Api.Controllers
         [HttpGet("{id}")]
         public ActionResult<Contact> GetContactById(Guid id)
         {
-            return Contacts.FirstOrDefault(x => x.Id == id);
+            return new Contact();
         }
 
         // POST api/<ContactAppController>
@@ -56,7 +57,7 @@ namespace ContactApp.Api.Controllers
                 contact.FirstName = value.FirstName;
                 contact.LastName = value.LastName;
                 contact.Email = value.Email;
-                contact.PhoneNumer = value.PhoneNumer;
+                contact.PhoneNumber = value.PhoneNumber;
                 contact.Status = value.Status;
             }
             this.Contacts.Add(contact);
@@ -67,14 +68,14 @@ namespace ContactApp.Api.Controllers
         [HttpPut("{id}")]
         public ActionResult<bool> Put(Guid id, [FromBody] Contact value)
         {
-            var contact = Contacts.FirstOrDefault(x => x.Id == id);
+            var contact = new Contact();
             if (contact != null)
             {
                 contact.Id = value.Id;
                 contact.FirstName = value.FirstName;
                 contact.LastName = value.LastName;
                 contact.Email = value.Email;
-                contact.PhoneNumer = value.PhoneNumer;
+                contact.PhoneNumber = value.PhoneNumber;
                 contact.Status = value.Status;
             }
             return Ok(true);

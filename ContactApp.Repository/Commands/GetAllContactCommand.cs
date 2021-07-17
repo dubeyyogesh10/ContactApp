@@ -1,10 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿// Authored By Yogesh, File Name : GetAllContactCommand.cs ,Date 18-07-2021
 
 namespace ContactApp.Repository.Commands
 {
-    class GetAllContactCommand
+    using ContactApp.Infra.Model;
+    using MediatR;
+    using System.Collections.Generic;
+
+    /// <summary>
+    /// Defines the <see cref="GetAllContactCommand" />.
+    /// </summary>
+    public sealed class GetAllContactCommand : IRequest<List<Contact>>
     {
     }
 }

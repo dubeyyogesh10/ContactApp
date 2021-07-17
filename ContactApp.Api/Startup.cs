@@ -1,8 +1,14 @@
+using ContactApp.Infra.Database;
+using ContactApp.Infra.Database.Config;
+using ContactApp.Infra.Model;
+using ContactApp.Repository.Services;
+using ContactApp.Repository.Services.Interface;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,6 +33,10 @@ namespace ContactApp.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<DataContext>((op) => op.UseSqlServer(Configuration["ConnectionString"]));
+            services.AddSingleton<IDbClient, DbClient>();
+            services.Configure<DbConfig>(Configuration);
+            services.AddScoped<IContactService, ContactService>();
             services.AddControllers();
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddSwaggerGen();
@@ -41,7 +51,7 @@ namespace ContactApp.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseCors();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

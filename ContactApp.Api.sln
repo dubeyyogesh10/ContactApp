@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactApp.Api", "ContactApp.Api\ContactApp.Api.csproj", "{3FAF699A-5C39-4A89-B217-F3086476008F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactApp.Api", "ContactApp.Api\ContactApp.Api.csproj", "{3FAF699A-5C39-4A89-B217-F3086476008F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactApp.Repository", "ContactApp.Repository\ContactApp.Repository.csproj", "{9F4A636C-E293-47E8-9FA8-EFE444E47B18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactApp.Repository", "ContactApp.Repository\ContactApp.Repository.csproj", "{9F4A636C-E293-47E8-9FA8-EFE444E47B18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactApp.Infra", "InfraCore\ContactApp.Infra.csproj", "{64857399-5AD6-4CC2-86DD-B1297C132909}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{9F4A636C-E293-47E8-9FA8-EFE444E47B18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F4A636C-E293-47E8-9FA8-EFE444E47B18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F4A636C-E293-47E8-9FA8-EFE444E47B18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64857399-5AD6-4CC2-86DD-B1297C132909}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64857399-5AD6-4CC2-86DD-B1297C132909}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64857399-5AD6-4CC2-86DD-B1297C132909}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64857399-5AD6-4CC2-86DD-B1297C132909}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
