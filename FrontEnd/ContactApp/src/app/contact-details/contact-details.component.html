@@ -1,0 +1,39 @@
+<div class="jumbotron py-3">
+    <h1 class="display-4 text-center">Contact App</h1>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <app-contact-details-form></app-contact-details-form>
+    </div>
+    <div class="col-md-6">
+        <span>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Status</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let ct of service.contactList">
+                        <td (click)="populateForm(ct)">{{ct.firstName}}</td>
+                        <td (click)="populateForm(ct)">{{ct.lastName}}</td>
+                        <td (click)="populateForm(ct)">{{ct.email}}</td>
+                        <td (click)="populateForm(ct)">{{ct.phoneNumber}}</td>
+                        <div *ngIf="ct.status; else elseBlock">
+                            <td (click)="populateForm(ct)"><i class="fas fa-lock-open"></i></td>
+                        </div>
+                        <ng-template #elseBlock>
+                            <td (click)="populateForm(ct)"><i class="fas fa-lock"></i></td>
+                        </ng-template>
+                        <td><i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(ct.id)"></i></td>
+                    </tr>
+                </tbody>
+            </table>
+        </span>
+    </div>
+</div>

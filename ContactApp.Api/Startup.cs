@@ -41,18 +41,23 @@ namespace ContactApp.Api
             services.AddControllers();
             services.AddSwaggerGen();
             services.AddMediatR(typeof(GetContactByIdQuery).Assembly);
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
+            app.UseCors(options =>
+            options.WithOrigins("http://localhost:4200")
+            .AllowAnyMethod()
+            .AllowAnyHeader());
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseCors();
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

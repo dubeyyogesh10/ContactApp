@@ -80,12 +80,17 @@ namespace ContactApp.Infra.Database
         /// </summary>
         /// <param name="contact">The contact<see cref="Contact"/>.</param>
         /// <returns>The <see cref="Task{bool}"/>.</returns>
-        public async Task<bool> UpdateContact(Contact contact)
+        public async Task<bool> UpdateContact(Contact request)
         {
-            var existingContact = await context.Contact.FindAsync(contact.Id).ConfigureAwait(false);
+            var existingContact = await context.Contact.FindAsync(request.Id).ConfigureAwait(false);
             if (existingContact != null)
             {
-                context.Contact.Update(contact);
+                existingContact.FirstName = request.FirstName;
+                existingContact.LastName = request.LastName;
+                existingContact.Email = request.Email;
+                existingContact.PhoneNumber = request.PhoneNumber;
+                existingContact.Status = request.Status;
+                context.Contact.Update(existingContact);
                 var result = await context.SaveChangesAsync().ConfigureAwait(false);
                 return result > 0;
             }
