@@ -6,7 +6,7 @@
 # TO RUN in Local Environment
 ## Database setup for EF Core
 ### 1. Open the "ContactApp.Api.sln" file in visual studio
-### 2. Open "appsettings.json" and replace "<yourServerName>" in connectionString with your own sql server.
+### 2. Open "appsettings.json" and replace "* <yourServerName> *" in connectionString with your own sql server.
 ### 3. Open package Manager console. Switch the "ContactApp.Infra" project (option available in console package Manager itself, at the top).
 ### 4. Run follwing Commands
   #### 1. add-migration newMigration
