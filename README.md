@@ -10,19 +10,20 @@
 ### 3. Open package Manager console. Switch the "ContactApp.Infra" project (option available in console package Manager itself, at the top).
 ### 4. Run follwing Commands
   #### 1. add-migration newMigration
-  #### 2. database-update  Microsoft Doc-https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=vs
+  #### 2. update-database
+  #### 3.Microsoft Doc-https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=vs
 
 ## Web API (.Net Core 3.1)
 ### 1. Run Contacts.Api in visual studio OR Go to ContactApp.Api folder where "ContactApp.Api.csproj" is located and open CMD/bash to run following commands.
-  #### 1. Run "dotnet restore"
-  #### 2. Run "dotnet build"
-  #### 3.Run "dotnet watch run" in CMD/bash. It will run the api on 5001 port and will open swagger in browser.
+  #### 1. "dotnet restore"
+  #### 2. "dotnet build"
+  #### 3. "dotnet watch run" in CMD/bash. It will run the api on 5001 port and will open swagger in browser.
 
 ## Front End (Angular 11)
 ### Go to "FrontEnd" present in the root directory of the folder.
 ### Run Following sterps
    #### npm install
-   #### ng serve
+   #### ng serve --o
 
 #### Tech stack and patterns - .Net Core WebAPI, Code First EF CORE,Angular 11, Swagger, MediatR CQRS Pattern, Respository, Async calls, Notification using toastr service.
 
