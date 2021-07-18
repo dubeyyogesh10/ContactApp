@@ -1,6 +1,7 @@
 using ContactApp.Infra.Database;
 using ContactApp.Infra.Database.Config;
 using ContactApp.Infra.Model;
+using ContactApp.Repository.Queries;
 using ContactApp.Repository.Services;
 using ContactApp.Repository.Services.Interface;
 using MediatR;
@@ -34,12 +35,12 @@ namespace ContactApp.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>((op) => op.UseSqlServer(Configuration["ConnectionString"]));
-            services.AddScoped<IDbClient, DbClient>();
-            services.Configure<DbConfig>(Configuration);
-            services.AddScoped<IContactService, ContactService>();
+            services.AddTransient<IDbClient, DbClient>();
+
+            services.AddTransient<IContactService, ContactService>();
             services.AddControllers();
-            services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddSwaggerGen();
+            services.AddMediatR(typeof(GetContactByIdQuery).Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
