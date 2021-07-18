@@ -3,11 +3,11 @@ export class ContactDetail {
 
   phoneNumber: number;
 
-  firstName: string = '';
+  firstName: string;
 
-  lastName: string = '';
+  lastName: string;
 
-  email: string = '';
+  email: string;
 
-  status: boolean;
+  status: boolean = true;
 }
