@@ -21,4 +21,4 @@ RUN dotnet publish "ContactApp.Api.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "ContactApp.Api.dll"]
+ENTRYPOINT ["dotnet", "ContactApp.Api.dll","--environment=Development"]

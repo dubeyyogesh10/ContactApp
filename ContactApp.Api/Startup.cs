@@ -49,10 +49,7 @@ namespace ContactApp.Api
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
-            app.UseCors(options =>
-            options.WithOrigins("http://localhost:4200")
-            .AllowAnyMethod()
-            .AllowAnyHeader());
+
 
             if (env.IsDevelopment())
             {
@@ -67,6 +64,10 @@ namespace ContactApp.Api
             });
 
             app.UseRouting();
+            app.UseCors(options =>
+            options.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader());
 
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>

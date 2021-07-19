@@ -15,3 +15,8 @@ services:
     depends_on:
       - "ms-sql-server"
     restart: always
+  contact-frontend:
+    build: FrontEnd/ContactApp/
+    ports:
+      - "4202:4200"
+    restart: always

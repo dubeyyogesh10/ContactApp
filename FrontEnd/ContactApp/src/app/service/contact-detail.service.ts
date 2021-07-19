@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class ContactDetailService {
   constructor(private httpClient: HttpClient) {}
 
-  readonly baseUrl = 'https://localhost:5001/api/ContactApp';
+  readonly baseUrl = 'http://localhost:80/api/contactApp';
   formData: ContactDetail = new ContactDetail();
   contactList: ContactDetail[];
 
