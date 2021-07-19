@@ -30,7 +30,11 @@ namespace ContactApp.Api.Controllers
         {
             return Ok(await mediatr.Send(new GetAllContactQuery()).ConfigureAwait(false));
         }
-
+        [HttpGet("demo")]
+        public ActionResult<string> demo()
+        {
+            return Ok("Hello from contapp Controller");
+        }
         // GET api/<ContactAppController>/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Contact>> GetContactById(long id)

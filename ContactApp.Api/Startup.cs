@@ -34,6 +34,7 @@ namespace ContactApp.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddDbContext<DataContext>((op) => op.UseSqlServer(Configuration["ConnectionString"]));
             services.AddTransient<IDbClient, DbClient>();
 
@@ -65,12 +66,9 @@ namespace ContactApp.Api
                 c.RoutePrefix = string.Empty;
             });
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
 
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
